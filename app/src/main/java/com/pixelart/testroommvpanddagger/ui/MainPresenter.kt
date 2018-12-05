@@ -1,8 +1,5 @@
 package com.pixelart.testroommvpanddagger.ui
 
-import com.pixelart.testroommvpanddagger.di.ApplicationComponent
-import com.pixelart.testroommvpanddagger.di.DaggerApplicationComponent
-import com.pixelart.testroommvpanddagger.di.NetworkModule
 import com.pixelart.testroommvpanddagger.model.Posts
 import com.pixelart.testroommvpanddagger.remote.APIService
 import io.reactivex.Observer
@@ -13,13 +10,12 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainPresenter(private val mainView: MainActivityContract.View): MainActivityContract.Presenter{
+class MainPresenter(private val mainView: MainActivityContract.View, private val apiService: APIService): MainActivityContract.Presenter{
 
-    @Inject
-    lateinit var apiService: APIService
+    /*@Inject
+    lateinit var apiService: APIService*/
 
     private var subscription: Disposable? = null
-    lateinit var applicationComponent: ApplicationComponent
 
 
     override fun getPost(posts: List<Posts>) {
