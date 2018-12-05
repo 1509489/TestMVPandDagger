@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(), MainActivit
     override fun init() {
         DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
-            .networkModule(NetworkModule)
+            .networkModule(NetworkModule())
             .build()
             .inject(this)
 
@@ -49,6 +49,7 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(), MainActivit
 
     override fun showPost(posts: List<Posts>) {
         adapter = RecyclerViewAdapter(posts, this)
+        mainBinding.recyclerView.layoutManager = layoutManager
         mainBinding.recyclerView.adapter = adapter
 
     }
@@ -60,7 +61,7 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(), MainActivit
     override fun getViewPresenter(): MainActivityContract.Presenter = presenter
 
     override fun showError(error: String) {
-
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
